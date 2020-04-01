@@ -10,10 +10,6 @@ package pkg05.fractions;
  * @author Marketa.Milerova
  */
 public class FractionsCalculator {
-    
-    private FractionsCalculator(){
-        
-    }
 
     public static Fraction add(Fraction a, Fraction b) {
         int cit = a.getCitatel() * b.getJmenovatel();
