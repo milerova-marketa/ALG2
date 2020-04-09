@@ -6,6 +6,8 @@
 package shapes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -29,21 +31,23 @@ public class ShapesApp {
                     System.out.println("Celková plocha: " + areaOfAll());
                     break;
                 case 3:
-                    printAll();
+                    printAll(shapes);
                     break;
                 case 4:
-                    int imax = maxO();
-                    System.out.println("Objekt s největším obvodem je: " + shapes.get(imax) + ", jehož obvod je: " + shapes.get(imax).perimeter());
+                    int imax = maxArea();
+                    System.out.println("Objekt s největším obsahem je: " + shapes.get(imax) + ", jehož obsah je: " + shapes.get(imax).area());
                     break;
                 case 5:
-                    shapes.clear();
+                    sort();
                     break;
                 case 6:
+                    shapes.clear();
                     break;
+                case 7: break;
                 default:
                     System.out.println("Zadejte validní číslo");
             }
-        } while (option != 6);
+        } while (option != 7);
     }
 
     private static double areaOfAll() {
@@ -54,11 +58,11 @@ public class ShapesApp {
         return area;
     }
 
-    private static void printAll() {
+    private static void printAll(ArrayList<Shape> array) {
         System.out.println("-------------------------");
         System.out.println("Máme zadány tyto objekty:");
-        for (Shape shape : shapes) {
-            System.out.println(shape);
+        for (Shape object : array) {
+            System.out.println(object);
         }
         System.out.println("-------------------------");
     }
@@ -69,12 +73,14 @@ public class ShapesApp {
         System.out.println("1 - Přidání objektu");
         System.out.println("2 - Zobrazení celkové plochy");
         System.out.println("3 - Výčet všech přidaných objektů");
-        System.out.println("4 - Zobrazení objektu s maximálním obvodem");
-        System.out.println("5 - Reset");
-        System.out.println("6 - Konec");
+        System.out.println("4 - Zobrazení objektu s maximálním obsahem");
+        System.out.println("5 - Výčet všech objektů sestupně podle obsahu");
+        System.out.println("6 - Reset");
+        System.out.println("7 - Konec");
         System.out.println("------------------------------------------");
         System.out.println("");
         return sc.nextInt();
+        //1 2 4 6 1 1 4 1 3 2 1 3 7
     }
 
     private static int GUIShape() {
@@ -131,17 +137,23 @@ public class ShapesApp {
         } while (option <= 0 || option > 5);
     }
 
-    private static int maxO() {
+    private static int maxArea() {
         double max = 0;
         int imax = -1;
         for (int i = 0; i < shapes.size(); i++) {
-            if (max < shapes.get(i).perimeter()) {
+            if (max < shapes.get(i).area()) {
                 imax = i;
-                max = shapes.get(i).perimeter();
+                max = shapes.get(i).area();
             }
 
         }
         return imax;
+    }
+
+    private static void sort() {
+        ArrayList<Shape> shapesSort = (ArrayList<Shape>)shapes.clone();
+        Collections.sort(shapesSort);  
+        printAll(shapesSort);
     }
 
 }

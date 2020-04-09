@@ -1,4 +1,4 @@
-package shapes;
+package interfacevariant;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Square extends Rectangle { //vztah: IS A, neboli každý čtverec j
 
     @Override
     public String toString() {
-        return name + ": " + getShapeName() + String.format(" a = %.2f", a);
+        return "Square{" + "a=" + a + '}';
     }
 
 }

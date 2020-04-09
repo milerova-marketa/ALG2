@@ -35,7 +35,7 @@ public class Triangle extends Shape {
 
     @Override
     public String toString() {
-        return "Triangle{" + "a=" + a + ", b=" + b + ", c=" + c + '}';
+        return super.toString() + String.format(" a = %.2f, b = %.2f, c = %.2f", a,b,c);
     }
 
     @Override
