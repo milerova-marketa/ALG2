@@ -17,6 +17,9 @@ public class Account {
     }
 
     public Account(double balance) {
+        if(balance<0){
+            throw new IllegalArgumentException("Zadejte kladnou sumu.");
+        }
         this.balance = balance;
     }
 

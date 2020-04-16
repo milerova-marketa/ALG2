@@ -26,8 +26,7 @@ public class Main {
         clients.get(1).openNewAccount(1200);
         clients.get(2).openNewAccount(120);
         for (Client client : clients) {
-            System.out.println("Jmeno: " + client.callName() + ", bilance vsech"
-                    + " uctu: " + client.balanceOnAll() + " Kč.");
+            System.out.printf("%s ma na vsech uctech %.2f Kč.%n",client.callName(),client.balanceOnAll());
         }
     }
 
