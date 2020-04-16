@@ -6,11 +6,12 @@ package kalendar;
  */
 public class Kalendar {
 
-    int day;
-    int month;
-    int year;
+    private int day;
+    private int month;
+    private int year;
 
     public Kalendar(int day, int month, int year) {
+        checkDate(day, month, year);
         this.day = day;
         this.month = month;
         this.year = year;
@@ -39,7 +40,7 @@ public class Kalendar {
 
     public String makeCalendar() {
         StringBuilder calendar = new StringBuilder();
-        calendar.append(String.format("Month: %2d Year: %4d%n", month,year));
+        calendar.append(String.format("%10s %4d%n", monthToString(month), year));
         calendar.append("PO UT ST CT PA SO NE %n");
         int tempDay = this.day;
         this.day = 1;
@@ -100,7 +101,7 @@ public class Kalendar {
     }
 
     public static int daysInYear(int year) {
-        return isYearLeap(year)? 366:365;
+        return isYearLeap(year) ? 366 : 365;
     }
 
     public static void main(String[] args) {
@@ -108,6 +109,45 @@ public class Kalendar {
         System.out.printf(k1.makeCalendar());
         k1.previousMonth();
         System.out.printf(k1.makeCalendar());
-        
+
+    }
+
+    private void checkDate(int day, int month, int year) {
+        if (month < 1 || month > 12) {
+            throw new IllegalArgumentException("Zadejte validni mesic.");
+        }
+        if (day < 1 || day > daysInMonths(year)[month - 1]) {
+            throw new IllegalArgumentException("Zadejte validni den");
+        }
+    }
+
+    private static String monthToString(int month) {
+        switch (month) {
+            case 1:
+                return "Leden";
+            case 2:
+                return "Unor";
+            case 3:
+                return "Brezen";
+            case 4:
+                return "Duben";
+            case 5:
+                return "Kveten";
+            case 6:
+                return "Cerven";
+            case 7:
+                return "Cervenec";
+            case 8:
+                return "Srpen";
+            case 9:
+                return "Zari";
+            case 10:
+                return "Rijen";
+            case 11:
+                return "Listopad";
+            case 12:
+                return "Prosinec";
+        }
+        return null;
     }
 }
