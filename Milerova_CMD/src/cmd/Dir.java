@@ -1,6 +1,8 @@
 package cmd;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -15,13 +17,31 @@ public class Dir extends Command {
         if (params.length == 1) {
             files = actualDir.listFiles();
             return new Status(actualDir, dirToString(files));
+        } else if (params.length == 2) {
+            if (params[1].equals("-o")) {
+                files = actualDir.listFiles();
+                Arrays.sort(files);
+                return new Status(actualDir, dirToString(files));
+            } else {
+                return new Status(actualDir, "Nevalidni příkaz\n");
+            }
+        } else if (params.length == 3) {
+            if (params[1].equals("-e")) {
+                String extension = params[2];
+                FileFilter ff = (File pathname) -> pathname.getName().endsWith(extension);
+                files = actualDir.listFiles(ff);
+                return new Status(actualDir, dirToString(files));
+            } else if (params[1].equals("-s")) {
+                int size = Integer.parseInt(params[2]);
+                FileFilter ff = (File pathname) -> pathname.length()>size;
+                files = actualDir.listFiles(ff);
+                return new Status(actualDir, dirToString(files));
+            } else{
+                return new Status(actualDir, "Nevalidní příkaz\n");
+            }
+        } else{
+            return new Status(actualDir, "Nevalidní příkaz\n");
         }
-        if (params.length > 2) {
-            return new Status(actualDir, "Nevalidni prikaz");
-        }
-        File directory;
-        directory = new File(actualDir.getAbsolutePath() + "\\" + params[1]);
-        return new Status(actualDir, dirToString(directory.listFiles()));
     }
 
     private String dirToString(File[] files) {

@@ -17,10 +17,10 @@ public class Cd extends Command {
     public Status execute(File actualDir) {
         File file;
         if (params.length == 1) {
-            return new Status(actualDir, "Zadejte parametr");
+            return new Status(actualDir, "Zadejte parametr\n");
         }
         if (params.length > 2) {
-            return new Status(actualDir, "Nevalidni prikaz");
+            return new Status(actualDir, "Nevalidni prikaz\n");
         }
         if(params[1].equals("..")){
             file = new File(actualDir.getParent());
