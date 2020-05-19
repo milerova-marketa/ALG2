@@ -34,14 +34,14 @@ public class DataHandler {
      * @throws java.lang.InstantiationException
      * @throws java.lang.IllegalAccessException
      */
-    public static String updateList(List<Client> clients, List<Property> properties, List<Reservation> reservations,String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static String updateList(List<Client> clients, List<Property> properties, List<Reservation> reservations, String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         String log = "";
         DataHandler.clients = clients;
         DataHandler.reservations = reservations;
         DataHandler.properties = properties;
-        log = log + loadListFromFile("client", type);
-        log = log + loadListFromFile("property", type);
-        log = log + loadListFromFile("reservation", type);
+        log = log + "ClientInfo:\n" + loadListFromFile("client", type);
+        log = log + "PropertyInfo:\n" + loadListFromFile("property", type);
+        log = log + "ReservationInfo:\n" + loadListFromFile("reservation", type);
         return log;
     }
 

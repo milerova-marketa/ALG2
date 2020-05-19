@@ -31,11 +31,11 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public String getList(String text) {
-        if (!canWe(text)) {
+    public String getList(String name) {
+        if (!canWe(name)) {
             return "Seznam je prázdný\n";
         }
-        switch (text) {
+        switch (name) {
             case "client":
                 return String.format("    %-20s %-20s%n",
                         "Křestní jméno", "Příjmení")
@@ -54,8 +54,8 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public String getDetail(int index, String text) {
-        switch (text) {
+    public String getDetail(int index, String name) {
+        switch (name) {
             case "client":
                 if (index < 1 || index > clients.size()) {
                     return "Zadáno špatné číslo u klienta\n";
@@ -67,7 +67,7 @@ public class Company implements CompanyInterface {
                 if (index < 1 || index > properties.size()) {
                     return "Zadáno špatné číslo u objektu\n";
                 }
-                return String.format("%-10s %-20s %-20s %-10s %12s%n",
+                return String.format("%-10s %-20s %-20s %-10s %13s%n",
                         "Typ", "Název", "Destinace", "Kapacita", "Cena za noc")
                         + properties.get(index - 1).getDetail();
 
@@ -84,9 +84,9 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public String sort(int option, String text) {
+    public String sort(int option, String name) {
         try {
-            switch (text) {
+            switch (name) {
                 case "client":
                     clients = Mycomparator.sortClients(option, clients);
                     break;
@@ -111,14 +111,14 @@ public class Company implements CompanyInterface {
         try {
             switch (option) {
                 case 1:
-                    log = DataHandler.updateList(clients, properties, reservations,".txt");
+                    log = DataHandler.updateList(clients, properties, reservations, ".txt");
                     break;
                 case 2:
                     FileHandler.createBinaries();
-                    log = DataHandler.updateList(clients, properties, reservations,".dat");
+                    log = DataHandler.updateList(clients, properties, reservations, ".dat");
                     break;
                 case 3:
-                    log = DataHandler.updateList(clients, properties, reservations,".xlsx");
+                    log = DataHandler.updateList(clients, properties, reservations, ".xlsx");
                     break;
                 default:
                     return "Nevalidní volba typu souboru";
@@ -133,8 +133,8 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public boolean canWe(String string) {
-        switch (string) {
+    public boolean canWe(String name) {
+        switch (name) {
             case "property":
                 return (properties != null && !properties.isEmpty());
             case "client":
@@ -148,21 +148,27 @@ public class Company implements CompanyInterface {
 
     @Override
     public String saveData(int listChoice, int sortChoice, int typeChoice) {
-        String string;
+        String string = "";
         String nameFile;
         try {
             switch (listChoice) {
                 case 1:
                     clients = Mycomparator.sortClients(sortChoice, clients, true);
-                    string = Formater.printClient(clients);
+                    if (typeChoice != 3) {
+                        string = Formater.printClient(clients);
+                    }
                     break;
                 case 2:
                     properties = Mycomparator.sortProperties(sortChoice, properties, true);
-                    string = Formater.printProperty(properties);
+                    if (typeChoice != 3) {
+                        string = Formater.printProperty(properties);
+                    }
                     break;
                 case 3:
                     reservations = Mycomparator.sortReservations(sortChoice, reservations, true);
-                    string = Formater.printReservation(reservations);
+                    if (typeChoice != 3) {
+                        string = Formater.printReservation(reservations);
+                    }
                     break;
                 default:
                     return "Chyba výběru seznamu";
@@ -194,9 +200,9 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public String addProperty(String string) {
+    public String addProperty(String info) {
         try {
-            Property p = Parser.parseProperty(string);
+            Property p = Parser.parseProperty(info);
             if (!DataHandler.checkDuplicate(properties, p)) {
                 properties.add(p);
             } else {
@@ -232,7 +238,8 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public String removeReservation(int index) {
+    public String removeReservation(int index
+    ) {
         if (index < 1 || index > reservations.size()) {
             return "Reservace nenalezena";
         } else {

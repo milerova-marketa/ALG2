@@ -45,13 +45,13 @@ public abstract class Property {
     public String getDetail() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-10s %-20s %-20s %-10d %10.2fKč", getClass().getSimpleName(), name, destination, getCapacity(), pricePerNightPerPerson));
-        sb.append("\n").append("Dostupné termíny:\n");
+        sb.append("\n").append("    -Dostupné termíny:\n");
         for (int i = 0; i < dates.size(); i++) {
-            sb.append((i + 1) + ". " + dates.get(i)).append("\n");
+            sb.append("         "+(i + 1) + ". " + dates.get(i)).append("\n");
         }
-        sb.append("Pokoje:\n");
+        sb.append("    -Pokoje:\n");
         for (int i = 0; i < rooms.size(); i++) {
-            sb.append("Pokoj č." + (i + 1) + ": ");
+            sb.append("         Pokoj č." + (i + 1) + ": ");
             sb.append(rooms.get(i)).append("\n");
         }
         return sb.toString();
@@ -66,7 +66,7 @@ public abstract class Property {
         for (Date date1 : dates) {
             if (date.getStart().isAfter(date1.getStart()) && date.getStart().isBefore(date1.getEnd())
                     || date.getEnd().isAfter(date1.getStart()) && date.getEnd().isBefore(date1.getEnd())) {
-                throw new IllegalArgumentException("Kolize termínů");
+                throw new IllegalArgumentException("Kolize termínů - " + date + "(" + name + ")");
             }
         }
         dates.add(date);
@@ -114,10 +114,10 @@ public abstract class Property {
      */
     public void setProperty(String name, String destination, double pricePerNightPerPerson, List<Room> rooms, List<Date> dates) {
         if (pricePerNightPerPerson < 0) {
-            throw new IllegalArgumentException("Nelze zadat zápornou cenu");
+            throw new IllegalArgumentException("Nelze zadat zápornou cenu - " + name);
         }
         if (rooms.isEmpty() || dates.isEmpty()) {
-            throw new IllegalArgumentException("Nebyly zadány pokoje či termíny");
+            throw new IllegalArgumentException("Nebyly zadány pokoje či termíny - " + name);
         }
         this.name = name;
         this.destination = destination;

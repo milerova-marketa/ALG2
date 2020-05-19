@@ -21,7 +21,7 @@ public class Client implements Comparable<Client> {
 
     public Client(String firstName, String lastName, String nationality, int age) {
         if (age < 18) {
-            throw new IllegalArgumentException("Osoba není plnoletá");
+            throw new IllegalArgumentException("Osoba " + firstName + " " + lastName + " není plnoletá");
         }
         this.firstName = firstName;
         this.lastName = lastName;

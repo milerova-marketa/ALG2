@@ -103,10 +103,10 @@ public class Formater {
      */
     public static String printProperty(List<Property> list) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-10s %-20s %-20s %-10s %12s%n",
+        sb.append(String.format("%-10s %-20s %-20s %-10s %13s%n",
                 "Typ", "Název", "Destinace", "Kapacita", "Cena za noc"));
         for (Property property : list) {
-            sb.append(property.getDetail()).append("\n");
+            sb.append(property.getDetail());
         }
         return sb.toString();
     }

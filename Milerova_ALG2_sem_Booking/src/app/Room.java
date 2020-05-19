@@ -21,6 +21,9 @@ public class Room {
         if (nSingles < 0 || nDoubles < 0) {
             throw new IllegalArgumentException("Chybná inicializace pokoje");
         }
+        if(nDoubles == 0 && nSingles == 0){
+            throw new IllegalArgumentException("Pokoj je prázdný");
+        }
         this.nSingles = nSingles;
         this.nDoubles = nDoubles;
     }

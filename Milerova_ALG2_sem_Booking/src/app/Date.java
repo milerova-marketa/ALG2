@@ -15,15 +15,21 @@ import java.time.format.DateTimeFormatter;
  */
 public class Date {
 
+    private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     private LocalDate start;
     private LocalDate end;
 
     public Date(LocalDate start, LocalDate end) {
         if (start.isAfter(end)) {
-            throw new IllegalArgumentException("Neplatný termín - počátek je po konci");
+            throw new IllegalArgumentException("Neplatný termín "
+                    + start.format(DTF) + "-" + end.format(DTF)
+                    + " - počátek je po konci");
         }
         if (start.isBefore(LocalDate.now()) || end.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Neplatný termín - je třeba zadat budoucí termín");
+            throw new IllegalArgumentException("Neplatný termín "
+                    + start.format(DTF) + "-" + end.format(DTF)
+                    + " - je třeba zadat budoucí termín");
         }
         this.start = start;
         this.end = end;
@@ -48,6 +54,6 @@ public class Date {
 
     @Override
     public String toString() {
-        return start.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "-" + end.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return start.format(DTF) + "-" + end.format(DTF);
     }
 }

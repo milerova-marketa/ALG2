@@ -5,6 +5,9 @@
  */
 package utils;
 
+import app.Client;
+import app.Property;
+import app.Reservation;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -26,7 +29,7 @@ import java.util.Scanner;
  */
 public class FileHandler {
 
-    private static final String[] OBJECTS = {"ClientInfo", "PropertyInfo", "ReservationInfo"};
+    private static final String[] FILE_NAMES = {"ClientInfo", "PropertyInfo", "ReservationInfo"};
 
     /**
      * Metoda na vytvoření souboru z daného seznamu
@@ -65,7 +68,7 @@ public class FileHandler {
                 type = ".dat";
                 file = new File(nameFile + type);
                 file.createNewFile();
-                writeToDAT(file, string);
+                writeToDAT(file, list);
                 break;
             default:
                 throw new IllegalArgumentException("Neplatný typ souboru");
@@ -90,31 +93,31 @@ public class FileHandler {
                 boolean isEnd = false;
                 while (!isEnd) {
                     try {
-                        if (path.contains(OBJECTS[0])) {
+                        if (path.contains(FILE_NAMES[0])) {
                             textList[0] = dis.readUTF();
                             textList[1] = dis.readUTF();
                             textList[2] = dis.readUTF();
                             textList[3] = "" + dis.readInt();
                             textFormated = Formater.format(textList[0], textList[1], textList[2], textList[3]);
 
-                        } else if (path.contains(OBJECTS[1])) {
+                        } else if (path.contains(FILE_NAMES[1])) {
                             textList[0] = dis.readUTF();
                             textList[1] = dis.readUTF();
                             textList[2] = dis.readUTF();
                             textList[3] = "" + dis.readDouble();
                             int n = dis.readInt();
-                            String[] rooms = new String[2*n];
-                            for (int i = 0; i < 2*n; i = i + 2) {
+                            String[] rooms = new String[2 * n];
+                            for (int i = 0; i < 2 * n; i = i + 2) {
                                 rooms[i] = "" + dis.readInt();
                                 rooms[i + 1] = "" + dis.readInt();
                             }
                             n = dis.readInt();
                             String[] dates = new String[n];
                             for (int i = 0; i < (n); i++) {
-                                dates[i] = String.format("%02d.%02d.%04d", dis.readInt(),dis.readInt(),dis.readInt());
+                                dates[i] = String.format("%02d.%02d.%04d", dis.readInt(), dis.readInt(), dis.readInt());
                             }
                             textFormated = Formater.format(textList[0], textList[1], textList[2], textList[3], rooms, dates);
-                        } else if (path.contains(OBJECTS[2])) {
+                        } else if (path.contains(FILE_NAMES[2])) {
                             StringBuilder sb = new StringBuilder();
                             sb.append(dis.readUTF()).append(";");
                             sb.append(dis.readUTF()).append(";");
@@ -157,10 +160,10 @@ public class FileHandler {
     }
 
     public static void createBinaries() throws FileNotFoundException, IOException {
-        for (int i = 0; i < OBJECTS.length; i++) {
-            File binaryFile = new File(OBJECTS[i] + ".dat");
+        for (int i = 0; i < FILE_NAMES.length; i++) {
+            File binaryFile = new File(FILE_NAMES[i] + ".dat");
             binaryFile.createNewFile();
-            File txtFile = new File(OBJECTS[i] + ".txt");
+            File txtFile = new File(FILE_NAMES[i] + ".txt");
             try (Scanner txt = new Scanner(txtFile)) {
                 try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(binaryFile))) {
                     while (txt.hasNext()) {
@@ -214,9 +217,51 @@ public class FileHandler {
         }
     }
 
-    private static void writeToDAT(File file, String string) throws FileNotFoundException, IOException {
+    private static void writeToDAT(File file, int name) throws FileNotFoundException, IOException {
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
-            dos.writeUTF(string);
+            switch (name) {
+                case 1:
+                    List<Client> clients = DataHandler.clients;
+                    for (Client client : clients) {
+                        dos.writeUTF(client.getFirstName());
+                        dos.writeUTF(client.getLastName());
+                        dos.writeUTF(client.getNationality());
+                        dos.writeInt(client.getAge());
+                    }
+                    break;
+                case 2:
+                    List<Property> properties = DataHandler.properties;
+                    for (Property property : properties) {
+                        dos.writeUTF(property.getClass().getSimpleName());
+                        dos.writeUTF(property.getName());
+                        dos.writeUTF(property.getDestination());
+                        dos.writeInt(property.getCapacity());
+                        dos.writeDouble(property.getPricePerNightPerPerson());
+                    }
+                    break;
+                case 3:
+                    List<Reservation> reservations = DataHandler.reservations;
+                    for (Reservation reservation : reservations) {
+                        dos.writeUTF(reservation.getClient().getFirstName());
+                        dos.writeUTF(reservation.getClient().getLastName());
+                        dos.writeUTF(reservation.getProperty().getName());
+                        dos.writeInt(reservation.getnPeople());
+                        dos.writeInt(reservation.getnDays());
+                        dos.writeInt(reservation.getReservedDate().getStart().getDayOfMonth());
+                        dos.writeInt(reservation.getReservedDate().getStart().getMonthValue());
+                        dos.writeInt(reservation.getReservedDate().getStart().getYear());
+                        dos.writeInt(reservation.getReservedDate().getEnd().getDayOfMonth());
+                        dos.writeInt(reservation.getReservedDate().getEnd().getMonthValue());
+                        dos.writeInt(reservation.getReservedDate().getEnd().getYear());
+                        dos.writeInt(reservation.getDateOfReservation().getDayOfMonth());
+                        dos.writeInt(reservation.getDateOfReservation().getMonthValue());
+                        dos.writeInt(reservation.getDateOfReservation().getYear());
+                        dos.writeDouble(reservation.getPrice());
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Seznam neexistuje");
+            }
         }
     }
 }

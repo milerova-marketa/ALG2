@@ -22,7 +22,7 @@ public class HotelRoom extends Property {
     @Override
     public void setProperty(String name, String destination, double pricePerNightPerPerson, List<Room> rooms, List<Date> dates) {
         if (rooms.size() > N_ROOMS_MAX) {
-            throw new IllegalArgumentException("Hotelový pokoj nemá více pokojů.");
+            throw new IllegalArgumentException("Hotelový pokoj " + name + " nemá více pokojů.");
         }
         super.setProperty(name, destination, pricePerNightPerPerson, rooms, dates);
     }
@@ -30,12 +30,12 @@ public class HotelRoom extends Property {
     @Override
     public String getDetail() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-10s %-20s %-10s %-10d %10dKč%n", getClass().getSimpleName(), name, destination, getCapacity(), pricePerNightPerPerson));
-        sb.append("\n").append("Dostupné termíny:\n");
+        sb.append(String.format("%-10s %-20s %-20s %-10d %10.2fKč%n", getClass().getSimpleName(), name, destination, getCapacity(), pricePerNightPerPerson));
+        sb.append("    -Dostupné termíny:\n");
         for (int i = 0; i < dates.size(); i++) {
-            sb.append((i + 1) + ". " + dates.get(i)).append("\n");
+            sb.append("        "+(i + 1) + ". " + dates.get(i)).append("\n");
         }
-        sb.append("Dispozice pokoje: ").append(rooms.get(0)).append("\n");
+        sb.append("    -Dispozice pokoje: ").append(rooms.get(0)).append("\n");
         return sb.toString();
     }
 

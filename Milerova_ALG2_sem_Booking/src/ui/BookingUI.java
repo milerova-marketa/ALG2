@@ -187,7 +187,13 @@ public class BookingUI {
                     }
                     break;
                 case 2:
-                    System.out.println(loadReservation());
+                    if (!booking.canWe("client")) {
+                        System.out.println("Seznam klientů je prázdný");
+                    } else if (!booking.canWe("property")) {
+                        System.out.println("Seznam objektů je prázdný");
+                    } else {
+                        System.out.println(loadReservation());
+                    }
                     break;
                 case 3:
                     if (booking.canWe("reservation")) {
@@ -222,7 +228,7 @@ public class BookingUI {
     private static void loadDataMenu() {
         System.out.println("1. Načíst textové soubory");
         System.out.println("2. Načíst binární soubory");
-        System.out.println("3. Načíst xls soubory");
+        System.out.println("3. Načíst xlsx soubory");
         int option = loadOption();
         System.out.println(booking.loadData(option));
     }
@@ -233,10 +239,10 @@ public class BookingUI {
         System.out.println("2. Seznam objektů");
         System.out.println("3. Seznam rezervací");
         int option = loadOption();
-        System.out.println("Přejete si seznam seřadit dle:");
         switch (option) {
             case 1:
                 if (booking.canWe("client")) {
+                    System.out.println("Přejete si seznam seřadit dle:");
                     System.out.println("1. Křestního jména");
                     System.out.println("2. Příjmení");
                     System.out.println("3. Národnosti");
@@ -247,6 +253,7 @@ public class BookingUI {
                 break;
             case 2:
                 if (booking.canWe("property")) {
+                    System.out.println("Přejete si seznam seřadit dle:");
                     System.out.println("1. Názvu objektu");
                     System.out.println("2. Destinace");
                     System.out.println("3. Kapacity");
@@ -257,6 +264,7 @@ public class BookingUI {
                 break;
             case 3:
                 if (booking.canWe("reservation")) {
+                    System.out.println("Přejete si seznam seřadit dle:");
                     System.out.println("1. Křestního jména klienta");
                     System.out.println("2. Příjmení klienta");
                     System.out.println("3. Názvu objektu");

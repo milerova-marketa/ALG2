@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Marketa.Milerova
  */
-public class Reservation implements Comparable<Reservation>{
+public class Reservation implements Comparable<Reservation> {
 
     private Client client;
     private Property property;
@@ -25,7 +25,7 @@ public class Reservation implements Comparable<Reservation>{
 
     public Reservation(Client client, Property property, int nPeople, LocalDate dateOfReservation, Date reservedDate) {
         if (property.getCapacity() < nPeople) {
-            throw new IllegalArgumentException("Překročena kapacita objektu.");
+            throw new IllegalArgumentException("Překročena kapacita objektu u:" + property.name);
         }
         this.client = client;
         this.property = property;
@@ -66,6 +66,11 @@ public class Reservation implements Comparable<Reservation>{
     public double getPrice() {
         return price;
     }
+
+    public Date getReservedDate() {
+        return reservedDate;
+    }
+    
 
     public String getDetail() {
         return String.format("%-20s %-20s %-20s %-10d %-10d %-25s %-15s %-20s",

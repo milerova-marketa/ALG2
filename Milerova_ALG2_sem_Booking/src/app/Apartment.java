@@ -21,11 +21,10 @@ public class Apartment extends Property {
 
     @Override
     public void setProperty(String name, String destination, double pricePerNightPerPerson, List<Room> rooms, List<Date> dates) {
-        if(rooms.size()> N_ROOMS_MAX){
-            throw new IllegalArgumentException("Překročen maximální počet pokojů");
+        if (rooms.size() > N_ROOMS_MAX) {
+            throw new IllegalArgumentException("Překročen maximální počet pokojů - " + name);
         }
         super.setProperty(name, destination, pricePerNightPerPerson, rooms, dates); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
 }

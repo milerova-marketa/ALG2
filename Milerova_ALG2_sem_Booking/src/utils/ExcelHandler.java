@@ -25,7 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelHandler {
 
-    static List<String> loadList(String name) throws FileNotFoundException, IOException {
+    public static List<String> loadList(String name) throws FileNotFoundException, IOException {
         List<String> list = new ArrayList();
         StringBuilder sb = new StringBuilder();
         try (FileInputStream file = new FileInputStream(new File(name))) {
