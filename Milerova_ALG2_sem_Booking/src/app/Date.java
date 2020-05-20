@@ -20,6 +20,11 @@ public class Date {
     private LocalDate start;
     private LocalDate end;
 
+    /**
+     * Konstruktor
+     * @param start začátek termínu
+     * @param end konec termínu
+     */
     public Date(LocalDate start, LocalDate end) {
         if (start.isAfter(end)) {
             throw new IllegalArgumentException("Neplatný termín "
@@ -35,10 +40,18 @@ public class Date {
         this.end = end;
     }
 
+    /**
+     * Metoda vrací počátek termínu
+     * @return počátek termínu
+     */
     public LocalDate getStart() {
         return start;
     }
 
+    /**
+     * Metoda vrací konec termínu
+     * @return konec termínu
+     */
     public LocalDate getEnd() {
         return end;
     }

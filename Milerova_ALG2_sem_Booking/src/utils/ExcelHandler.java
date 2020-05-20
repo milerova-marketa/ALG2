@@ -20,11 +20,20 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
+ * Třída pro manipulaci s Excel soubory - použití externí knihovny
  *
  * @author Marketa.Milerova
  */
 public class ExcelHandler {
 
+    /**
+     * Metoda načte z daného excelovského souboru potřebná data
+     *
+     * @param name název souboru
+     * @return seznam informací k daným objektům
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static List<String> loadList(String name) throws FileNotFoundException, IOException {
         List<String> list = new ArrayList();
         StringBuilder sb = new StringBuilder();
@@ -65,10 +74,10 @@ public class ExcelHandler {
                     text = text.replace(" ;", ";");
                     text = text.replace("; ", ";");
                 }
-                if(name.contains("Reservation")){
-                    String termin = text.substring(text.length()-11,text.length()-1);
-                    String uprava = text.substring(0,text.length()-12);
-                    text =  uprava + ";" + termin;
+                if (name.contains("Reservation")) {
+                    String termin = text.substring(text.length() - 11, text.length() - 1);
+                    String uprava = text.substring(0, text.length() - 12);
+                    text = uprava + ";" + termin;
                 }
                 list.add(text);
                 sb = new StringBuilder();
@@ -76,5 +85,4 @@ public class ExcelHandler {
         }
         return list;
     }
-
 }

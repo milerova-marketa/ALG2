@@ -11,6 +11,9 @@ package app;
  */
 public class Cabin extends Property{
 
+    /**
+     * Konstruktor
+     */
     public Cabin() {
     }
     

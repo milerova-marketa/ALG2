@@ -16,6 +16,9 @@ public class Apartment extends Property {
 
     private static final int N_ROOMS_MAX = 4;
 
+    /**
+     * Konstruktor
+     */
     public Apartment() {
     }
 

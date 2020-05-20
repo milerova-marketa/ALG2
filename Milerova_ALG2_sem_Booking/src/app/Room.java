@@ -17,21 +17,37 @@ public class Room {
     //počet dvoulůžek
     private int nDoubles;
 
+    /**
+     * Konstruktor
+     *
+     * @param nSingles počet jednolůžek
+     * @param nDoubles počet dvoulůžek
+     */
     public Room(int nSingles, int nDoubles) {
         if (nSingles < 0 || nDoubles < 0) {
             throw new IllegalArgumentException("Chybná inicializace pokoje");
         }
-        if(nDoubles == 0 && nSingles == 0){
+        if (nDoubles == 0 && nSingles == 0) {
             throw new IllegalArgumentException("Pokoj je prázdný");
         }
         this.nSingles = nSingles;
         this.nDoubles = nDoubles;
     }
 
+    /**
+     * Metoda vrací počet jednolůžek v pokoji
+     *
+     * @return počet jednolůžek
+     */
     public int getnSingles() {
         return nSingles;
     }
 
+    /**
+     * Metoda vrací počet dvoulůžek v pokoji
+     *
+     * @return počet dvoulůžek
+     */
     public int getnDoubles() {
         return nDoubles;
     }

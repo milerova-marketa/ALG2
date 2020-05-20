@@ -7,15 +7,26 @@ import java.util.Scanner;
 import utils.Formater;
 
 /**
- * upravit company aby pracoval podle stringu se seznamy
+ *
  *
  * @author Marketa.Milerova
  */
 public class BookingUI {
 
+    /**
+     * Interface pro komunikaci s logikou programu
+     */
     public static CompanyInterface booking;
+
+    /**
+     * Načítání hodnot ze vstupu
+     */
     public static Scanner sc = new Scanner(System.in, "ISO-8859-2").useLocale(new Locale("cs", "CZ"));
 
+    /**
+     * Vstupní metoda
+     * @param args
+     */
     public static void main(String[] args) {
         booking = new Company();
         mainMenu();
@@ -112,10 +123,9 @@ public class BookingUI {
         String name = "property";
         boolean isEnd = false;
         int option, index;
-        String info;
         while (!isEnd) {
             System.out.println("*************************Seznam objektů*************************");
-            System.out.print(booking.getList(name));;
+            System.out.print(booking.getList(name));
             System.out.println("****************************************************************");
             System.out.println("1. Zobrazit detail");
             System.out.println("2. Přidat objekt");
@@ -308,7 +318,7 @@ public class BookingUI {
         System.out.println("Zadejte cenu za noc");
         pricePerNight = sc.nextLine();
         System.out.println("Kolik si přejete zadat pokojů?");
-        int m, n;
+        int n;
         try {
             n = Integer.parseInt(sc.nextLine());
             rooms = new String[2 * n];

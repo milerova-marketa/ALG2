@@ -19,6 +19,14 @@ public class Client implements Comparable<Client> {
     private String nationality;
     private int age;
 
+    /**
+     * Konstruktor
+     *
+     * @param firstName křestní jméno
+     * @param lastName příjmení
+     * @param nationality národnost
+     * @param age věk
+     */
     public Client(String firstName, String lastName, String nationality, int age) {
         if (age < 18) {
             throw new IllegalArgumentException("Osoba " + firstName + " " + lastName + " není plnoletá");
@@ -29,18 +37,38 @@ public class Client implements Comparable<Client> {
         this.age = age;
     }
 
+    /**
+     * Metoda vracející křestní jméno klienta
+     *
+     * @return křestní jméno
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Metoda vracející příjmení klienta
+     *
+     * @return příjmení klienta
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Metoda vracející národnost klienta
+     *
+     * @return národnost
+     */
     public String getNationality() {
         return nationality;
     }
 
+    /**
+     * Metoda vracející věk
+     *
+     * @return věk
+     */
     public int getAge() {
         return age;
     }

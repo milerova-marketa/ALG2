@@ -7,11 +7,15 @@ package app;
 
 /**
  * Třída typu objektu
+ *
  * @author Marketa.Milerova
  */
-public class Villa extends Property{
+public class Villa extends Property {
 
+    /**
+     * Konstruktor
+     */
     public Villa() {
     }
-    
+
 }

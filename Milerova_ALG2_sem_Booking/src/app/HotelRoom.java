@@ -16,6 +16,9 @@ public class HotelRoom extends Property {
 
     private static final int N_ROOMS_MAX = 1;
 
+    /**
+     * Konstruktor
+     */
     public HotelRoom() {
     }
 
@@ -33,7 +36,7 @@ public class HotelRoom extends Property {
         sb.append(String.format("%-10s %-20s %-20s %-10d %10.2fKč%n", getClass().getSimpleName(), name, destination, getCapacity(), pricePerNightPerPerson));
         sb.append("    -Dostupné termíny:\n");
         for (int i = 0; i < dates.size(); i++) {
-            sb.append("        "+(i + 1) + ". " + dates.get(i)).append("\n");
+            sb.append("        ").append(i + 1).append(". ").append(dates.get(i)).append("\n");
         }
         sb.append("    -Dispozice pokoje: ").append(rooms.get(0)).append("\n");
         return sb.toString();

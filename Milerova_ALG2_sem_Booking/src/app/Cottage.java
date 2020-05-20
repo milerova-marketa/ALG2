@@ -16,6 +16,9 @@ public class Cottage extends Property {
 
     private static final double MAX_PRICE = 4000;
 
+    /**
+     * Konstruktor
+     */
     public Cottage() {
     }
 

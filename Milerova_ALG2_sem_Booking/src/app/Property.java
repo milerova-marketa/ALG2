@@ -14,20 +14,54 @@ import java.util.Objects;
  */
 public abstract class Property {
 
+    /**
+     * Název objektu
+     */
     protected String name;
+
+    /**
+     * Destinace
+     */
     protected String destination;
+
+    /**
+     * Volné termíny
+     */
     protected List<Date> dates;
+
+    /**
+     * Seznam pokojů
+     */
     protected List<Room> rooms;
+
+    /**
+     * Cena za noc na osobu
+     */
     protected double pricePerNightPerPerson;
 
+    /**
+     * Metoda vrací název objektu
+     *
+     * @return název objektu
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Metoda vrací destinaci objektu
+     *
+     * @return destinace
+     */
     public String getDestination() {
         return destination;
     }
 
+    /**
+     * Metoda vrací cenu za noc na osobu
+     *
+     * @return cena za noc na osobu
+     */
     public double getPricePerNightPerPerson() {
         return pricePerNightPerPerson;
     }
@@ -47,7 +81,7 @@ public abstract class Property {
         sb.append(String.format("%-10s %-20s %-20s %-10d %10.2fKč", getClass().getSimpleName(), name, destination, getCapacity(), pricePerNightPerPerson));
         sb.append("\n").append("    -Dostupné termíny:\n");
         for (int i = 0; i < dates.size(); i++) {
-            sb.append("         "+(i + 1) + ". " + dates.get(i)).append("\n");
+            sb.append("         " + (i + 1) + ". " + dates.get(i)).append("\n");
         }
         sb.append("    -Pokoje:\n");
         for (int i = 0; i < rooms.size(); i++) {

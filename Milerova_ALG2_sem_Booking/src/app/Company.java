@@ -27,6 +27,9 @@ public class Company implements CompanyInterface {
     private List<Reservation> reservations = new ArrayList();
     private List<Property> properties = new ArrayList();
 
+    /**
+     * Konstruktor
+     */
     public Company() {
     }
 

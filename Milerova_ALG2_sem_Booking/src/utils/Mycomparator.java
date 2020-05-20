@@ -5,7 +5,6 @@ import app.Property;
 import app.Reservation;
 import java.text.Collator;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,12 +66,7 @@ public class Mycomparator {
                 });
                 break;
             case 3:
-                properties.sort(new Comparator<Property>() {
-                    @Override
-                    public int compare(Property o1, Property o2) {
-                        return (int) (o1.getPricePerNightPerPerson() - o2.getPricePerNightPerPerson());
-                    }
-                });
+                properties.sort((Property o1, Property o2) -> (int) (o1.getPricePerNightPerPerson() - o2.getPricePerNightPerPerson()));
                 break;
             default:
                 throw new IllegalArgumentException("Neplatné třídění");

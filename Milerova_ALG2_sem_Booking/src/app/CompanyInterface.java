@@ -33,7 +33,7 @@ public interface CompanyInterface {
      *
      * @param option parametr řazení
      * @param name jméno seznamu
-     * @return sežazený seznam
+     * @return seřazený seznam
      */
     public String sort(int option, String name);
 
@@ -49,7 +49,7 @@ public interface CompanyInterface {
      * Metoda testující, zda seznam existuje a není prázdný
      *
      * @param name název seznamu
-     * @return informca zda seznam existuje a není prázdný
+     * @return informace zda seznam existuje a není prázdný
      */
     public boolean canWe(String name);
 

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
+ * Třída k manipulaci souborů
  * @author Marketa.Milerova
  */
 public class FileHandler {
@@ -153,12 +153,12 @@ public class FileHandler {
         throw new IllegalArgumentException("Nevalidní typ");
     }
 
-    private static void writeToTXT(File file, String string) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            bw.write(string);
-        }
-    }
-
+    /**
+     * Metoda vytvářející binární soubory z textových souborů
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static void createBinaries() throws FileNotFoundException, IOException {
         for (int i = 0; i < FILE_NAMES.length; i++) {
             File binaryFile = new File(FILE_NAMES[i] + ".dat");
@@ -214,6 +214,12 @@ public class FileHandler {
                     }
                 }
             }
+        }
+    }
+
+    private static void writeToTXT(File file, String string) throws IOException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            bw.write(string);
         }
     }
 

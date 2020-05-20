@@ -16,19 +16,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Třída parsující text na objekty
  *
  * @author Marketa.Milerova
  */
 public class Parser {
 
+    /**
+     * Klasický formát pro data
+     */
     public static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
+    /**
+     * Metoda naparsuje text a vytvoří z něj Client
+     *
+     * @param string info o klientovi
+     * @return klient
+     */
     public static Client parseClient(String string) {
         String[] infoSeparated = string.split(" +");
         Client c = new Client(infoSeparated[0], infoSeparated[1], infoSeparated[2], Integer.parseInt(infoSeparated[3]));
         return c;
     }
 
+    /**
+     * Metoda naparsuje text a vytvoří z něj Property
+     *
+     * @param string info o objektu
+     * @return objekt
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public static Property parseProperty(String string) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<Room> rooms = new ArrayList();
         List<Date> dates = new ArrayList();
@@ -55,6 +74,12 @@ public class Parser {
         return p;
     }
 
+    /**
+     * Metoda naparsuje text a vytvoří z něj Reservation
+     *
+     * @param string info o rezervaci
+     * @return rezervace
+     */
     public static Reservation parseReservation(String string) {
         String[] info, clientInfo, dateInfo;
         int[] index;

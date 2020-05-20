@@ -19,16 +19,28 @@ import java.util.List;
  */
 public class DataHandler {
 
+    /**
+     * Seznam klientů
+     */
     public static List<Client> clients = new ArrayList();
+
+    /**
+     * Seznam rezervací
+     */
     public static List<Reservation> reservations = new ArrayList();
+
+    /**
+     * Seznam objektů
+     */
     public static List<Property> properties = new ArrayList();
 
     /**
-     * Metoda vrátí aktualizované seznamy o data z textových souborů
+     * Metoda vrátí aktualizované seznamy o data ze souborů
      *
      * @param clients seznam klientů
      * @param properties seznam objektů
      * @param reservations seznam rezervací
+     * @param type typ načítaných souborů
      * @return log o chybách v načítání
      * @throws java.lang.ClassNotFoundException
      * @throws java.lang.InstantiationException
@@ -50,7 +62,7 @@ public class DataHandler {
      *
      * @param list seznam
      * @param p kontrolovaný člen
-     * @return true pokud se člen v seznamu již nachází.
+     * @return true pokud se člen v seznamu již nachází. Jinak false.
      */
     public static boolean checkDuplicate(List list, Object p) {
         if (list.stream().anyMatch((o) -> (o.equals(p)))) {
@@ -97,6 +109,7 @@ public class DataHandler {
         return ij;
     }
 
+    // Metoda načítá jednolivé vstupy ze souborů, vytváří z nich objekty a přidává je do seznamů
     private static String loadListFromFile(String name, String type) {
         List<String> info;
         String fileName = Formater.firstLetterToUpperCase(name)
