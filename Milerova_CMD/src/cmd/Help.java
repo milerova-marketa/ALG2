@@ -17,6 +17,7 @@ public class Help extends Command {
     public Status execute(File actualDir) {
         String help = "HELP\n"
                 + String.format("%-30s %s%n", "help", "Display help")
+                + String.format("%-30s %s%n", "tree", "Display tree of current folder")
                 + String.format("%-30s %s%n", "dir", "Display list of files and folders")
                 + String.format("%-30s %s%n", "dir [-o]", "Display an ordered list of files and folders")
                 + String.format("%-30s %s%n", "dir [-e] [file extension]", "Display a list of files and folders with a specified extension")
