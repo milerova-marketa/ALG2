@@ -25,11 +25,13 @@ import java.util.Scanner;
 
 /**
  * Třída k manipulaci souborů
+ *
  * @author Marketa.Milerova
  */
 public class FileHandler {
 
     private static final String[] FILE_NAMES = {"ClientInfo", "PropertyInfo", "ReservationInfo"};
+    public static final File DATA_DIR = new File(System.getProperty("user.dir") + File.separator + "data");
 
     /**
      * Metoda na vytvoření souboru z daného seznamu
@@ -60,13 +62,13 @@ public class FileHandler {
         switch (fileType) {
             case 2:
                 type = ".txt";
-                file = new File(nameFile + type);
+                file = new File(DATA_DIR, nameFile + type);
                 file.createNewFile();
                 writeToTXT(file, string);
                 break;
             case 3:
                 type = ".dat";
-                file = new File(nameFile + type);
+                file = new File(DATA_DIR, nameFile + type);
                 file.createNewFile();
                 writeToDAT(file, list);
                 break;
@@ -84,7 +86,7 @@ public class FileHandler {
      * @throws java.io.FileNotFoundException
      */
     public static List<String> readFile(String path) throws FileNotFoundException, IOException {
-        File f = new File(path);
+        File f = new File(DATA_DIR, path);
         List<String> list = new ArrayList();
         String[] textList = new String[8];
         String textFormated = "";
@@ -161,9 +163,9 @@ public class FileHandler {
      */
     public static void createBinaries() throws FileNotFoundException, IOException {
         for (int i = 0; i < FILE_NAMES.length; i++) {
-            File binaryFile = new File(FILE_NAMES[i] + ".dat");
+            File binaryFile = new File(DATA_DIR, FILE_NAMES[i] + ".dat");
             binaryFile.createNewFile();
-            File txtFile = new File(FILE_NAMES[i] + ".txt");
+            File txtFile = new File(DATA_DIR, FILE_NAMES[i] + ".txt");
             try (Scanner txt = new Scanner(txtFile)) {
                 try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(binaryFile))) {
                     while (txt.hasNext()) {

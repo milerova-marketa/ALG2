@@ -47,14 +47,22 @@ public class DataHandler {
      * @throws java.lang.IllegalAccessException
      */
     public static String updateList(List<Client> clients, List<Property> properties, List<Reservation> reservations, String type) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String log = "";
         DataHandler.clients = clients;
         DataHandler.reservations = reservations;
         DataHandler.properties = properties;
-        log = log + "ClientInfo:\n" + loadListFromFile("client", type);
-        log = log + "PropertyInfo:\n" + loadListFromFile("property", type);
-        log = log + "ReservationInfo:\n" + loadListFromFile("reservation", type);
-        return log;
+        String logC = loadListFromFile("client", type);
+        if (!logC.isEmpty()) {
+            logC = "ClientInfo:\n" + logC;
+        }
+        String logP = loadListFromFile("property", type);
+        if (!logP.isEmpty()) {
+            logP = "PropertyInfo:\n" + logP;
+        }
+        String logR = loadListFromFile("reservation", type);
+        if (!logR.isEmpty()) {
+            logR = "ReservationInfo:\n" + logR;
+        }
+        return logC + logP + logR;
     }
 
     /**

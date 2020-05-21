@@ -37,7 +37,7 @@ public class ExcelHandler {
     public static List<String> loadList(String name) throws FileNotFoundException, IOException {
         List<String> list = new ArrayList();
         StringBuilder sb = new StringBuilder();
-        try (FileInputStream file = new FileInputStream(new File(name))) {
+        try (FileInputStream file = new FileInputStream(new File(FileHandler.DATA_DIR, name))) {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             XSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
