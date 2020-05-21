@@ -85,7 +85,7 @@ public class Competition {
     }
 
     private void loadStartText(String startFilepath) throws FileNotFoundException, IOException {
-        File startFile = new File(startFilepath);
+        File startFile = new File(Writer.dataDir, startFilepath);
         try (Scanner inStart = new Scanner(startFile)) {
             while (inStart.hasNext()) {
                 int number = inStart.nextInt();
@@ -104,7 +104,7 @@ public class Competition {
     }
 
     private void loadFinishText(String finishFilepath) throws FileNotFoundException, IOException {
-        File finishFile = new File(finishFilepath);
+        File finishFile = new File(Writer.dataDir, finishFilepath);
         try (BufferedReader inFinish = new BufferedReader(new FileReader(finishFile))) { //automatické uzavření souboru
             String line;
             while ((line = inFinish.readLine()) != null) {
@@ -119,7 +119,8 @@ public class Competition {
         BinaryWriter bw = new BinaryWriter();
         startFilepath = Character.toUpperCase(startFilepath.charAt(0)) + startFilepath.substring(1);
         bw.createStart(startFilepath);
-        try (DataInputStream dis = new DataInputStream((new FileInputStream(startFilepath)))) {
+        File startFile = new File(Writer.dataDir, startFilepath);
+        try (DataInputStream dis = new DataInputStream((new FileInputStream(startFile)))) {
             boolean isEnd = false;
             while (!isEnd) {
                 try {
@@ -147,7 +148,8 @@ public class Competition {
         BinaryWriter bw = new BinaryWriter();
         finishFilepath = Character.toUpperCase(finishFilepath.charAt(0)) + finishFilepath.substring(1);
         bw.createFinish(finishFilepath);
-        try (DataInputStream dis = new DataInputStream((new FileInputStream(finishFilepath)))) {
+        File finishFile = new File(Writer.dataDir, finishFilepath);
+        try (DataInputStream dis = new DataInputStream((new FileInputStream(finishFile)))) {
             boolean isEnd = false;
             while (!isEnd) {
                 try {

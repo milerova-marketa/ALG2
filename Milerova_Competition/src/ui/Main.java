@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
-    // du udělat metody na načítání a vytvoření binárních souborů ze start a finish
+    // du přepsat program tak aby fungoval pro data uložená v adresáři data
 
     public static void main(String[] args) {
         Competition c = new Competition();

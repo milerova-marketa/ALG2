@@ -6,6 +6,7 @@
 package filehandling;
 
 import app.Runner;
+import java.io.File;
 import java.util.List;
 import java.io.IOException;
 
@@ -14,6 +15,8 @@ import java.io.IOException;
  * @author Marketa.Milerova
  */
 public abstract class Writer {
+
+    public static File dataDir = new File(System.getProperty("user.dir") + File.separator + "data");
 
     public abstract void saveResults(String resultFilePath, List<Runner> runners) throws IOException;
 }

@@ -7,6 +7,7 @@ package filehandling;
 
 import app.Runner;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +21,8 @@ public class TextWriter extends Writer {
 
     @Override
     public void saveResults(String resultFilePath, List<Runner> runners) throws IOException {
-        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(resultFilePath, false)))) {
+        File resultFile = new File(dataDir, resultFilePath);
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(resultFile, false)))) {
             pw.println("Nove vysledky");
             int n = 1;
             for (Runner runner : runners) {

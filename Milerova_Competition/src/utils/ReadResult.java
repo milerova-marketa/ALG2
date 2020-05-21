@@ -6,8 +6,10 @@
 package utils;
 
 import app.Runner;
+import filehandling.Writer;
 import java.io.DataInputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +22,8 @@ import java.time.LocalTime;
 public class ReadResult {
 
     public static void ReadResult(String resultFilePath) throws FileNotFoundException, IOException {
-        try (DataInputStream dis = new DataInputStream((new FileInputStream(resultFilePath)))) {
+        File resultFile = new File(Writer.dataDir, resultFilePath);
+        try (DataInputStream dis = new DataInputStream((new FileInputStream(resultFile)))) {
             boolean isEnd = false;
             int n;
             System.out.println(dis.readUTF());

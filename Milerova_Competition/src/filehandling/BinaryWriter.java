@@ -23,7 +23,8 @@ public class BinaryWriter extends Writer {
 
     @Override
     public void saveResults(String resultFilePath, List<Runner> runners) throws IOException {
-        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(resultFilePath))) {
+        File resultFile = new File(dataDir, resultFilePath);
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(resultFile))) {
             dos.writeUTF("Nove vysledky");
             int n = 1;
             for (Runner runner : runners) {
@@ -42,8 +43,8 @@ public class BinaryWriter extends Writer {
     }
 
     public void createStart(String startFilePath) throws FileNotFoundException, IOException {
-        File binaryFile = new File(startFilePath);
-        File textFile = new File(startFilePath.replace(".dat", ".txt"));
+        File binaryFile = new File(dataDir,startFilePath);
+        File textFile = new File(dataDir,startFilePath.replace(".dat", ".txt"));
         try (Scanner out = new Scanner(textFile)) {
             try (DataOutputStream in = new DataOutputStream(new FileOutputStream(binaryFile))) {
                 while (out.hasNext()) {
@@ -60,8 +61,8 @@ public class BinaryWriter extends Writer {
     }
 
     public void createFinish(String finishFilePath) throws FileNotFoundException, IOException {
-        File binaryFile = new File(finishFilePath);
-        File textFile = new File(finishFilePath.replace(".dat", ".txt"));
+        File binaryFile = new File(dataDir,finishFilePath);
+        File textFile = new File(dataDir,finishFilePath.replace(".dat", ".txt"));
         try (Scanner out = new Scanner(textFile)) {
             try (DataOutputStream in = new DataOutputStream(new FileOutputStream(binaryFile))) {
                 while (out.hasNext()) {
