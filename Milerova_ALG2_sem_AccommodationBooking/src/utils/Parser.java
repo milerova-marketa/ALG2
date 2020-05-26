@@ -35,7 +35,9 @@ public class Parser {
      */
     public static Client parseClient(String string) {
         String[] infoSeparated = string.split(" +");
-        Client c = new Client(infoSeparated[0], infoSeparated[1], infoSeparated[2], Integer.parseInt(infoSeparated[3]));
+        Client c = new Client(Formater.firstLetterToUpperCase(infoSeparated[0]),
+                Formater.firstLetterToUpperCase(infoSeparated[1]),
+                infoSeparated[2], Integer.parseInt(infoSeparated[3]));
         return c;
     }
 
@@ -68,9 +70,11 @@ public class Parser {
             LocalDate end = LocalDate.parse(datesInfo[i + 1], DTF);
             dates.add(new Date(start, end));
         }
-        Class c = Class.forName("app." + info[0]);
+        Class c = Class.forName("app." + Formater.firstLetterToUpperCase(info[0]));
         Property p = (Property) c.newInstance();
-        p.setProperty(info[1], info[2], Double.parseDouble(info[3]), rooms, dates);
+        p.setProperty(Formater.firstLetterToUpperCase(info[1]),
+                Formater.firstLetterToUpperCase(info[2]),
+                Double.parseDouble(info[3]), rooms, dates);
         return p;
     }
 
@@ -97,7 +101,9 @@ public class Parser {
         nPeople = Integer.parseInt(info[2].replace(".0", ""));
         dateInfo = info[3].split(" +");
         dateReserved = LocalDate.parse(info[4], DTF);
-        index = DataHandler.checkValidity(clientInfo[0], clientInfo[1], info[1]);
+        index = DataHandler.checkValidity(Formater.firstLetterToUpperCase(clientInfo[0]),
+                Formater.firstLetterToUpperCase(clientInfo[1]),
+                Formater.firstLetterToUpperCase(info[1]));
         p = DataHandler.properties.get(index[1]);
         c = DataHandler.clients.get(index[0]);
         start = LocalDate.parse(dateInfo[0], DTF);

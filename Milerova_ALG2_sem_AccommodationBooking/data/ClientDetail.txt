@@ -36,4 +36,4 @@ Suzie                Ansell               egyptská             78
 Thomasine            Buschman             grónská              86 
 Vernon               Birt                 estonská             64 
 Yanira               Um                   grónská              72 
-Zenaida              Ducan                islandská            75 
+zenaida              ducan                islandská            75 

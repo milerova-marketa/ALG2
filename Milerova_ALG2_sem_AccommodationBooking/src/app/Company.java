@@ -194,7 +194,7 @@ public class Company implements CompanyInterface {
             if (!DataHandler.checkDuplicate(clients, c)) {
                 clients.add(c);
             } else {
-                throw new ObjectAlreadyInListException("Klient" + c.getFirstName() + " " + c.getLastName() + "již existuje");
+                throw new ObjectAlreadyInListException("Klient " + c.getFirstName() + " " + c.getLastName() + " již existuje");
             }
         } catch (ObjectAlreadyInListException e) {
             return e.getMessage();
@@ -209,7 +209,7 @@ public class Company implements CompanyInterface {
             if (!DataHandler.checkDuplicate(properties, p)) {
                 properties.add(p);
             } else {
-                throw new ObjectAlreadyInListException("Klient" + p.getName() + "již existuje");
+                throw new ObjectAlreadyInListException("Objekt " + p.getName() + " již existuje");
             }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException("Nepodařilo se naparsovat objekt - " + e.getMessage());

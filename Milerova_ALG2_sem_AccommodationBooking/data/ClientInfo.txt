@@ -6,4 +6,4 @@ Jakob   Nietzsche   holanská        18
 Albert  Einstein    americká        45
 Gerta   Miller      německá         72
 John    Connor      americká        81
-Miro    Malčik      slovenská       48
+miro    malčik      slovenská       48
