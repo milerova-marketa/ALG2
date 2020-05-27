@@ -86,7 +86,7 @@ public class Parser {
      */
     public static Reservation parseReservation(String string) {
         String[] info, clientInfo, dateInfo;
-        int[] index;
+        List<Object> index = new ArrayList();
         Reservation r;
         Property p;
         Client c;
@@ -104,8 +104,8 @@ public class Parser {
         index = DataHandler.checkValidity(Formater.firstLetterToUpperCase(clientInfo[0]),
                 Formater.firstLetterToUpperCase(clientInfo[1]),
                 Formater.firstLetterToUpperCase(info[1]));
-        p = DataHandler.properties.get(index[1]);
-        c = DataHandler.clients.get(index[0]);
+        p = (Property) index.get(1);
+        c = (Client) index.get(0);
         start = LocalDate.parse(dateInfo[0], DTF);
         end = LocalDate.parse(dateInfo[1], DTF);
         date = new Date(start, end);
@@ -118,5 +118,5 @@ public class Parser {
             throw new IllegalArgumentException("Termín " + date.toString() + " neexistuje");
         }
     }
-
+    
 }

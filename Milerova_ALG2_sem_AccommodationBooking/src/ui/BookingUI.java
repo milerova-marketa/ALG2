@@ -4,7 +4,6 @@ import app.Company;
 import app.CompanyInterface;
 import java.util.Locale;
 import java.util.Scanner;
-import utils.Formater;
 
 /**
  *
@@ -25,6 +24,7 @@ public class BookingUI {
 
     /**
      * Vstupní metoda
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -340,7 +340,7 @@ public class BookingUI {
         } catch (NumberFormatException e) {
             return "Přidání objektu selhalo - zadán nevalidní argument";
         }
-        return booking.addProperty(Formater.format(type, name, destination, pricePerNight, rooms, dates));
+        return booking.addProperty(type, name, destination, pricePerNight, rooms, dates);
     }
 
     private static String loadClient() {
@@ -353,7 +353,7 @@ public class BookingUI {
         nationality = sc.nextLine();
         System.out.println("Zadejte věk klienta");
         age = sc.nextLine();
-        return booking.addClient(Formater.format(firstName, lastName, nationality, age));
+        return booking.addClient(firstName, lastName, nationality, age);
     }
 
     private static String loadReservation() {

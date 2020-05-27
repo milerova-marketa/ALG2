@@ -22,17 +22,17 @@ public class DataHandler {
     /**
      * Seznam klientů
      */
-    public static List<Client> clients = new ArrayList();
+    protected static List<Client> clients = new ArrayList();
 
     /**
      * Seznam rezervací
      */
-    public static List<Reservation> reservations = new ArrayList();
+    protected static List<Reservation> reservations = new ArrayList();
 
     /**
      * Seznam objektů
      */
-    public static List<Property> properties = new ArrayList();
+    protected static List<Property> properties = new ArrayList();
 
     /**
      * Metoda vrátí aktualizované seznamy o data ze souborů
@@ -50,19 +50,22 @@ public class DataHandler {
         DataHandler.clients = clients;
         DataHandler.reservations = reservations;
         DataHandler.properties = properties;
-        String logC = loadListFromFile("client", type);
-        if (!logC.isEmpty()) {
-            logC = "ClientInfo:\n" + logC;
+        if (!type.isEmpty()) {
+            String logC = loadListFromFile("client", type);
+            if (!logC.isEmpty()) {
+                logC = "ClientInfo:\n" + logC;
+            }
+            String logP = loadListFromFile("property", type);
+            if (!logP.isEmpty()) {
+                logP = "PropertyInfo:\n" + logP;
+            }
+            String logR = loadListFromFile("reservation", type);
+            if (!logR.isEmpty()) {
+                logR = "ReservationInfo:\n" + logR;
+            }
+            return logC + logP + logR;
         }
-        String logP = loadListFromFile("property", type);
-        if (!logP.isEmpty()) {
-            logP = "PropertyInfo:\n" + logP;
-        }
-        String logR = loadListFromFile("reservation", type);
-        if (!logR.isEmpty()) {
-            logR = "ReservationInfo:\n" + logR;
-        }
-        return logC + logP + logR;
+        return "";
     }
 
     /**
@@ -85,9 +88,9 @@ public class DataHandler {
      * @param firstName křestníjméno klienta
      * @param lastName příjmení klienta
      * @param propertyName název objektu
-     * @return indexy, na kterých se klient a objekt nachází
+     * @return list ve kterém se nachází nalezený klient a objekt
      */
-    public static int[] checkValidity(String firstName, String lastName, String propertyName) {
+    public static List<Object> checkValidity(String firstName, String lastName, String propertyName) {
         boolean found = false;
         boolean found1 = false;
         int i, j = -1;
@@ -111,10 +114,10 @@ public class DataHandler {
         if (!found1) {
             throw new IllegalArgumentException(propertyName + " neexistuje v databázi");
         }
-        int[] ij = new int[2];
-        ij[0] = i;
-        ij[1] = j;
-        return ij;
+        List<Object> clientObject = new ArrayList();
+        clientObject.add(clients.get(i));
+        clientObject.add(properties.get(j));
+        return clientObject;
     }
 
     // Metoda načítá jednolivé vstupy ze souborů, vytváří z nich objekty a přidává je do seznamů

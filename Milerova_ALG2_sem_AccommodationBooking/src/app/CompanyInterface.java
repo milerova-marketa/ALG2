@@ -67,18 +67,27 @@ public interface CompanyInterface {
     /**
      * Metoda vytvoří nového klienta a přidá ho do seznamu
      *
-     * @param info potřebné informace o klientovi
+     * @param firstName křestní jméno
+     * @param lastName příjmení
+     * @param nationality národnost
+     * @param age věk
      * @return informace o přidání klienta
      */
-    public String addClient(String info);
+    public String addClient(String firstName, String lastName, String nationality, String age);
 
     /**
      * Metoda vytvoří nový objekt a přidá ho do seznamu
      *
-     * @param info potřebné informace o objektu
+     * @param type typ objektu
+     * @param name název objektu
+     * @param destination země, ve které se obejkt nachází
+     * @param pricePerNight cena za noc pro jednoho člověka
+     * @param rooms pole stringů reprezentující kolik je v jednotlivých pokojích
+     * jednolůžek a dvoulůžek
+     * @param dates pole stringů reprezentující volné termíny
      * @return informace o přidání objektu
      */
-    public String addProperty(String info);
+    public String addProperty(String type, String name, String destination, String pricePerNight, String[] rooms, String[] dates);
 
     /**
      * Metoda vytvoří novou rezervaci a přidá ji do seznamu

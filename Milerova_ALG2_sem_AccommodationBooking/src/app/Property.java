@@ -147,6 +147,9 @@ public abstract class Property {
      * @param dates seznam volných termínů
      */
     public void setProperty(String name, String destination, double pricePerNightPerPerson, List<Room> rooms, List<Date> dates) {
+        if (!name.matches("[a-zA-ZÀ-ž]+[[ ]*[a-zA-ZÀ-ž]*]*") || !destination.matches("[a-zA-ZÀ-ž]+[[ ]*[a-zA-ZÀ-ž]*]*")) {
+            throw new IllegalArgumentException("Neplatný název či destinace objektu");
+        }
         if (pricePerNightPerPerson < 0) {
             throw new IllegalArgumentException("Nelze zadat zápornou cenu - " + name);
         }

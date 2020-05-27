@@ -28,6 +28,12 @@ public class Client implements Comparable<Client> {
      * @param age věk
      */
     public Client(String firstName, String lastName, String nationality, int age) {
+        if (!firstName.matches("[a-zA-ZÀ-ž]+[[ ]*[a-zA-ZÀ-ž]*]*")
+                || !lastName.matches("[a-zA-ZÀ-ž]+[[ ]*[a-zA-ZÀ-ž]*]*")
+                || !nationality.matches("[a-zÀ-ž]+")
+                || !nationality.endsWith("á")) {
+            throw new IllegalArgumentException("Neplatné jméno či národnost");
+        }
         if (age < 18) {
             throw new IllegalArgumentException("Osoba " + firstName + " " + lastName + " není plnoletá");
         }

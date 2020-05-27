@@ -126,7 +126,7 @@ public class Company implements CompanyInterface {
                 default:
                     return "Nevalidní volba typu souboru";
             }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | IOException e) {
+        } catch (Exception e) {
             return e.getMessage();
         }
         if (log.isEmpty()) {
@@ -154,6 +154,7 @@ public class Company implements CompanyInterface {
         String string = "";
         String nameFile;
         try {
+            DataHandler.updateList(clients, properties, reservations, "");
             switch (listChoice) {
                 case 1:
                     clients = Mycomparator.sortClients(sortChoice, clients, true);
@@ -188,7 +189,8 @@ public class Company implements CompanyInterface {
     }
 
     @Override
-    public String addClient(String info) {
+    public String addClient(String firstName, String lastName, String nationality, String age) {
+        String info = Formater.format(firstName, lastName, nationality, age);
         try {
             Client c = Parser.parseClient(info);
             if (!DataHandler.checkDuplicate(clients, c)) {
@@ -196,14 +198,15 @@ public class Company implements CompanyInterface {
             } else {
                 throw new ObjectAlreadyInListException("Klient " + c.getFirstName() + " " + c.getLastName() + " již existuje");
             }
-        } catch (ObjectAlreadyInListException e) {
+        } catch (Exception e) {
             return e.getMessage();
         }
         return "Klient přidán";
     }
 
     @Override
-    public String addProperty(String info) {
+    public String addProperty(String type, String name, String destination, String pricePerNight, String[] rooms, String[] dates) {
+        String info = Formater.format(type, name, destination, pricePerNight, rooms, dates);
         try {
             Property p = Parser.parseProperty(info);
             if (!DataHandler.checkDuplicate(properties, p)) {
@@ -213,7 +216,7 @@ public class Company implements CompanyInterface {
             }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException("Nepodařilo se naparsovat objekt - " + e.getMessage());
-        } catch (ObjectAlreadyInListException ex) {
+        } catch (Exception ex) {
             return ex.getMessage();
         }
         return "Objekt přidán";
@@ -244,11 +247,11 @@ public class Company implements CompanyInterface {
     public String removeReservation(int index
     ) {
         if (index < 1 || index > reservations.size()) {
-            return "Reservace nenalezena";
+            return "Rezervace nenalezena";
         } else {
             reservations.get(index - 1).restoreDate();
             reservations.remove(index - 1);
-            return "Reservace odebrána";
+            return "Rezervace odebrána";
         }
     }
 
